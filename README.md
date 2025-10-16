@@ -32,7 +32,7 @@ This repository is structured to support:
 ## ⚙️ Installation
 
 ### 1️⃣ Install WSL (For Windows)
-**Detailed Documentation:** https://medium.com/@srikantsingh673/run-linux-on-windows-like-a-pro-no-dual-boot-no-vm-5ab4a9683dc8
+**Detailed Documentation :** https://medium.com/@srikantsingh673/run-linux-on-windows-like-a-pro-no-dual-boot-no-vm-5ab4a9683dc8
 
 ### 2️⃣ Install Rust (via rustup)
 **Official Documentation :** https://doc.rust-lang.org/book/ch01-01-installation.html
@@ -40,6 +40,7 @@ This repository is structured to support:
 
 ## 🏗️ Project Structure
 
+```text
 rust-lab/
 │
 ├── Cargo.toml                # Project manifest (dependencies, workspace setup)
@@ -77,7 +78,7 @@ rust-lab/
 │            ├── main.rs  
 │
 └── target/                   # Auto-created by Cargo (compiled output)
-
+```
 
 ## ▶️ Run a Specific .rs File
 
