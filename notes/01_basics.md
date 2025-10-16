@@ -97,6 +97,7 @@ The value of x is: 6
 
 Rust is a statically typed language, which means that it must know the types of all variables at compile time. The compiler can usually infer what type we want to use based on the value and how we use it.
 
+```text
 | Category                 | Type           | Size / Notes             | Example                                       | Description                        |
 | ------------------------ | -------------- | ------------------------ | --------------------------------------------- | ---------------------------------- |
 | **Scalar**               | `i8`           | 8-bit signed             | `let x: i8 = -10;`                            | Integer, negative and positive     |
@@ -136,7 +137,7 @@ Rust is a statically typed language, which means that it must know the types of 
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Reference / Borrowed** | `&[T]`         | Slice                    | `let s: &[i32] = &arr;`                       | Borrowed view of array or vector   |
 |___________________________________________________________________________________________________________________________________________________________|
-
+```
 **For more reference:** https://doc.rust-lang.org/book/ch03-02-data-types.html
 
 
