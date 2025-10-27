@@ -6,7 +6,9 @@ import time
 # 1. Heavy mathematical computation
 # --------------------------
 def heavy_computation(x: int) -> int:
-    """Sum of squares from 0 to x."""
+    """
+    Sum of squares from 0 to x.
+    """
     return sum(n * n for n in range(x + 1))
 
 
@@ -14,7 +16,9 @@ def heavy_computation(x: int) -> int:
 # 2. Heavy string processing
 # --------------------------
 def heavy_string_processing(n: int) -> str:
-    """Concatenate and reverse random strings n times."""
+    """
+    Concatenate and reverse random strings n times.
+    """
     result = ""
     letters = string.ascii_letters
     for _ in range(n):
@@ -27,7 +31,9 @@ def heavy_string_processing(n: int) -> str:
 # 3. Large list manipulation
 # --------------------------
 def heavy_list_manipulation(n: int) -> list:
-    """Generate list of n random numbers, sort and filter even numbers."""
+    """
+    Generate list of n random numbers, sort and filter even numbers.
+    """
     numbers = [random.randint(0, 1000) for _ in range(n)]
     numbers.sort()
     even_numbers = [num for num in numbers if num % 2 == 0]
@@ -38,7 +44,9 @@ def heavy_list_manipulation(n: int) -> list:
 # 4. File I/O heavy test
 # --------------------------
 def heavy_file_io(n: int, filename: str = "py_output.txt") -> None:
-    """Write and read large file n times."""
+    """
+    Write and read large file n times.
+    """
     with open(filename, "w") as f:
         for _ in range(n):
             line = ''.join(random.choices(string.ascii_letters + string.digits, k=100))

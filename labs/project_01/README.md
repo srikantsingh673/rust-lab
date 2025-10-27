@@ -1,6 +1,13 @@
-# project_01
+# Project_01
 
-## Quickstart
+**Hypothesis :** Try to integrate Rust with Python to improve performance for computationally intensive tasks.
+
+**Benchmark Criteria :** Measure execution time and memory usage of Python-only vs. Rust-accelerated implementations for the same computational tasks.
+
+- Arithmetic Operations
+- String Processing
+- List Manipulation
+- File I/O
 
 
 1. **Create and activate a Python virtual environment (recommended)**
