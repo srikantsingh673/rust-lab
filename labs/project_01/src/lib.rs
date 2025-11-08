@@ -15,13 +15,8 @@ pub fn experiment_summary() {
 
 
 // --------------------------
-// 1. Heavy mathematical computation
+// 1. Arithmetic Operations
 // --------------------------
-#[pyfunction]
-fn heavy_computation(x: u128) -> u128 {
-    (0..=x).map(|n| n * n).sum::<u128>()
-}
-
 #[pyfunction]
 fn arithmetic_operations(x: u128) -> f64 {
     let mut result = 0.0;
@@ -33,7 +28,7 @@ fn arithmetic_operations(x: u128) -> f64 {
 }
 
 // --------------------------
-// 2. Heavy string processing
+// 2. String processing
 // --------------------------
 #[pyfunction]
 fn string_processing(n: usize) -> String {
@@ -51,7 +46,7 @@ fn string_processing(n: usize) -> String {
 }
 
 // --------------------------
-// 3. Heavy list manipulation
+// 3. List manipulation
 // --------------------------
 #[pyfunction]
 fn list_manipulation(n: usize) -> Vec<usize> {
@@ -64,7 +59,7 @@ fn list_manipulation(n: usize) -> Vec<usize> {
 
 
 // --------------------------
-// 4. File I/O heavy test
+// 4. File I/O
 // --------------------------
 #[pyfunction]
 fn file_io(n: usize, filename: &str) -> Vec<String> {
@@ -93,9 +88,9 @@ fn file_io(n: usize, filename: &str) -> Vec<String> {
         .collect()
 }
 
-// --------------------------
+// -----------------------------------
 // 5. Conditional if-else speed test
-// --------------------------
+// -----------------------------------
 #[pyfunction]
 fn number_to_name(n: usize) -> &'static str {
     if n == 0 { "zero" }
@@ -205,7 +200,6 @@ fn number_to_name(n: usize) -> &'static str {
 
 #[pymodule]
 fn project_01(_py: Python, m: &Bound<'_, PyModule>) -> PyResult<()> {
-    m.add_function(wrap_pyfunction!(heavy_computation, m)?)?;
     m.add_function(wrap_pyfunction!(arithmetic_operations, m)?)?;
     m.add_function(wrap_pyfunction!(string_processing, m)?)?;
     m.add_function(wrap_pyfunction!(list_manipulation, m)?)?;

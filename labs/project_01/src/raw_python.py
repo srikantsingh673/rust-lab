@@ -2,16 +2,29 @@ import random
 import string
 import timeit
 import csv
+import time
+import os
 
-# --------------------------
-# 1. Heavy mathematical computation
-# --------------------------
-def heavy_computation(x: int) -> int:
-    """
-    Sum of squares from 0 to x.
-    """
-    return sum(n * n for n in range(x + 1))
+# Set random seed for determinism
+random.seed(42)
 
+# A helper function to benchmark with warmup and multiple repetitions
+def benchmark_func(func, *args, repeats=5):
+    # Warmup run
+    func(*args)
+    # Measure multiple repetitions
+    times = timeit.repeat(lambda: func(*args), repeat=repeats, number=1)
+    mean_time = sum(times) / len(times)
+    stddev = (sum((t - mean_time) ** 2 for t in times) / len(times)) ** 0.5
+    return mean_time, stddev
+
+# Generate unique filename for file IO to avoid caching bias
+def unique_filename(prefix="output", suffix=".txt"):
+    return f"{prefix}_{int(time.time() * 1000)}{suffix}"
+
+# -----------------------------
+# 1. Arithmetic operations 
+# -----------------------------
 def arithmetic_operations(x: int) -> float:
     """
     Perform a complex arithmetic calculation using +, -, *, /, % for each n in 1..x.
@@ -24,7 +37,7 @@ def arithmetic_operations(x: int) -> float:
 
 
 # --------------------------
-# 2. Heavy string processing
+# 2. String processing
 # --------------------------
 def string_processing(n: int) -> str:
     """
@@ -39,7 +52,7 @@ def string_processing(n: int) -> str:
 
 
 # --------------------------
-# 3. Large list manipulation
+# 3. list manipulation
 # --------------------------
 
 def list_manipulation(n: int) -> list:
@@ -265,7 +278,7 @@ def number_to_name(n: int) -> str:
 
 
 # --------------------------
-# 4. File I/O heavy test
+# 4. File I/O 
 # --------------------------
 def file_io(n: int, filename: str = "output/py_output.txt") -> None:
     """
@@ -282,41 +295,46 @@ def file_io(n: int, filename: str = "output/py_output.txt") -> None:
 
 
 # --------------------------
-# Example usage with timing
+# Main benchmarking logic
 # --------------------------
 if __name__ == "__main__":
     csv_path = "output/result.csv"
+
+    # Clean result file before runs or change to separate file per run
+    if os.path.exists(csv_path):
+        os.remove(csv_path)
+
     results = []
-    number = 1
 
-    math_time = timeit.timeit(lambda: arithmetic_operations(10**8), number=number)
-    print(f"Math test done in: {math_time} seconds")
-    results.append(["Python", "arithmetic_operations", math_time])
+    # Arithmetic Operations
+    mean_time, stddev = benchmark_func(arithmetic_operations, 10**7)
+    print(f"Math test done in: {mean_time:.4f} s (stddev {stddev:.4f})")
+    results.append(["Python", "arithmetic_operations", mean_time, stddev])
 
-    string_time = timeit.timeit(lambda: string_processing(10**6), number=number)
-    print(f"String processing done in: {string_time} seconds")
-    results.append(["Python", "string_processing", string_time])
+    # String Processing
+    mean_time, stddev = benchmark_func(string_processing, 10**5)
+    print(f"String processing done in: {mean_time:.4f} s (stddev {stddev:.4f})")
+    results.append(["Python", "string_processing", mean_time, stddev])
 
-    list_time = timeit.timeit(lambda: list_manipulation(10**6), number=number)
-    print(f"List manipulation done in: {list_time} seconds")
-    results.append(["Python", "list_manipulation", list_time])
+    # List Manipulation
+    mean_time, stddev = benchmark_func(list_manipulation, 10**5)
+    print(f"List manipulation done in: {mean_time:.4f} s (stddev {stddev:.4f})")
+    results.append(["Python", "list_manipulation", mean_time, stddev])
 
+    # File I/O: Use unique filename each run
+    fname = unique_filename("output/py_output", ".txt")
+    mean_time, stddev = benchmark_func(file_io, 10**5, fname)
+    print(f"File I/O done in: {mean_time:.4f} s (stddev {stddev:.4f})")
+    results.append(["Python", "file_io", mean_time, stddev])
 
-    fileio_time = timeit.timeit(lambda: file_io(10**6), number=number)
-    print(f"File I/O done in: {fileio_time} seconds")
-    results.append(["Python", "file_io", fileio_time])
-
-    # Conditional if-else speed test
-    cond_time = timeit.timeit(lambda: [number_to_name(i % 101) for i in range(10**7)], number=number)
-    print(f"Conditional if-else test done in: {cond_time} seconds")
-    results.append(["Python", "number_to_name", cond_time])
+    # Conditional if-else test
+    mean_time, stddev = benchmark_func(lambda: [number_to_name(i % 101) for i in range(10**7)])
+    print(f"Conditional if-else test done in: {mean_time:.4f} s (stddev {stddev:.4f})")
+    results.append(["Python", "number_to_name", mean_time, stddev])
 
     # Write results to CSV
-    with open(csv_path, mode="a", newline="") as csvfile:
+    with open(csv_path, mode="w", newline="") as csvfile:
         writer = csv.writer(csvfile)
-        # Write header if file is empty
-        csvfile.seek(0, 2)
-        if csvfile.tell() == 0:
-            writer.writerow(["Implementation", "Function", "Time (seconds)"])
+        writer.writerow(["Implementation", "Function", "Mean Time (seconds)", "Std Dev"])
         for row in results:
             writer.writerow(row)
