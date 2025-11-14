@@ -7,7 +7,7 @@ import os
 
 random.seed(42)
 
-def benchmark_func(func, *args, repeats=5):
+def benchmark_func(func, *args, repeats=20):
     func(*args)  # warm-up
     times = timeit.repeat(lambda: func(*args), repeat=repeats, number=1)
     mean_time = sum(times) / len(times)

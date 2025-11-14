@@ -37,7 +37,8 @@
 
    Still in `labs/project_01`, run:
    ```bash
-   python src/exp.py
+   python src/raw_python.py 
+   python src/embedded_python.py 
    ```
 
 ---
@@ -69,10 +70,11 @@ RDS quantifies the relative timing difference between Python and Rust for each f
 
 | Function               | Python (s) | Rust (s) | Speedup (Py÷Rust) | RDS    |
 |------------------------|------------|----------|-------------------|--------|
-| arithmetic_operations  | 0.88       | 0.42     | 2.11              | 1.11   |
-| file_io                | 0.62       | 2.26     | 0.27              | 2.65   |
-| list_manipulation      | 0.06       | 0.07     | 0.89              | 0.12   |
-| string_processing      | 0.56       | 4.47     | 0.13              | 6.93   |
+| arithmetic_operations  | 0.9710     | 0.4555   | 2.13              | 0.47   |
+| string_processing      | 0.6114     | 4.9387   | 0.12              | 8.08   |
+| list_manipulation      | 0.0481     | 0.0724   | 0.66              | 1.50   |
+| file_io                | 0.6740     | 2.5396   | 0.27              | 3.77   |
+| number_to_name         | 3.3405     | 6.8353   | 0.49              | 2.05   |
 
 
 See the output images for visual comparisons and further insights.

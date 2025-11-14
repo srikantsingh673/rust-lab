@@ -9,7 +9,7 @@ import os
 random.seed(42)
 
 # A helper function to benchmark with warmup and multiple repetitions
-def benchmark_func(func, *args, repeats=5):
+def benchmark_func(func, *args, repeats=20):
     # Warmup run
     func(*args)
     # Measure multiple repetitions
