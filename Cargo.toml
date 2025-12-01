@@ -1,7 +1,13 @@
 [package]
-name = "rust-lab"
+name = "rust_lab"
 version = "0.1.0"
-edition = "2024"
-default-run = "rust-lab"
+edition = "2021"
+
+
+[lib]
+name = "rust_lab"
+crate-type = ["cdylib", "lib"]
 
 [dependencies]
+pyo3 = { version = "0.21", features = ["extension-module"] }
+rand = "0.8"

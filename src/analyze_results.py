@@ -1,23 +1,35 @@
-import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import pandas as pd
 import os
-
-# Load results from CSV
-csv_path = "output/result.csv"
-df = pd.read_csv(csv_path)
 
 
 # === CONFIG ===
-INPUT_FILE = "output/result.csv"
+PYTHON_CSV = "output/result.csv"
+RUST_CSV = "output/result_rust.csv"
 OUTPUT_DIR = "output/"
 
 # Create output directory if not exists
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # === LOAD DATA ===
-df = pd.read_csv(INPUT_FILE)
+df_py = pd.read_csv(PYTHON_CSV)
+df_rust = pd.read_csv(RUST_CSV)
+
+# Standardize column names for merging
+df_py = df_py.rename(columns={
+	'Mean Time (seconds)': 'Time (seconds)',
+	'Std Dev': 'StdDev'
+})
+df_rust = df_rust.rename(columns={
+	'Mean Time (seconds)': 'Time (seconds)',
+	'Std Dev': 'StdDev'
+})
+
+# Combine both dataframes
+df = pd.concat([df_py, df_rust], ignore_index=True)
 df['Time (seconds)'] = df['Time (seconds)'].astype(float)
+df['StdDev'] = df['StdDev'].astype(float)
 
 # === BASIC OVERVIEW ===
 print("\n=== RAW DATA PREVIEW ===")

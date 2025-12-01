@@ -1,18 +1,6 @@
-// use rust_lab::{greet};
-
-// fn main() {
-//     greet("Srikant");
-// }
+use rust_lab::{experiment_summary};
 
 fn main() {
-    let number = -8;
-    if number < 0 {
-        println!("Negative number");
-    }
-    else if number < 10 {
-        println!("Small number");
-    }
-    else {
-        println!("Big number");
-    }
+    println!("Running rust_lab main file...");
+    experiment_summary();
 }

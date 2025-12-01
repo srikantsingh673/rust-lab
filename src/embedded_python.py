@@ -1,4 +1,4 @@
-import project_01
+import rust_lab
 import timeit
 import random
 import time
@@ -25,24 +25,24 @@ if __name__ == "__main__":
 
     results = []
 
-    mean_time, stddev = benchmark_func(project_01.arithmetic_operations, 10**7)
+    mean_time, stddev = benchmark_func(rust_lab.arithmetic_operations, 10**7)
     print(f"Math test done in: {mean_time:.4f} s (stddev {stddev:.4f})")
     results.append(["Rust", "arithmetic_operations", mean_time, stddev])
 
-    mean_time, stddev = benchmark_func(project_01.string_processing, 10**5)
+    mean_time, stddev = benchmark_func(rust_lab.string_processing, 10**5)
     print(f"String processing done in: {mean_time:.4f} s (stddev {stddev:.4f})")
     results.append(["Rust", "string_processing", mean_time, stddev])
 
-    mean_time, stddev = benchmark_func(project_01.list_manipulation, 10**5)
+    mean_time, stddev = benchmark_func(rust_lab.list_manipulation, 10**5)
     print(f"List manipulation done in: {mean_time:.4f} s (stddev {stddev:.4f})")
     results.append(["Rust", "list_manipulation", mean_time, stddev])
 
     fname = unique_filename("output/rs_output", ".txt")
-    mean_time, stddev = benchmark_func(project_01.file_io, 10**5, fname)
+    mean_time, stddev = benchmark_func(rust_lab.file_io, 10**5, fname)
     print(f"File I/O done in: {mean_time:.4f} s (stddev {stddev:.4f})")
     results.append(["Rust", "file_io", mean_time, stddev])
 
-    mean_time, stddev = benchmark_func(lambda: [project_01.number_to_name(i % 101) for i in range(10**7)])
+    mean_time, stddev = benchmark_func(lambda: [rust_lab.number_to_name(i % 101) for i in range(10**7)])
     print(f"Conditional if-else test done in: {mean_time:.4f} s (stddev {stddev:.4f})")
     results.append(["Rust", "number_to_name", mean_time, stddev])
 
